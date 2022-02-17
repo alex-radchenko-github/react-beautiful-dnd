@@ -21,7 +21,7 @@ const TodoList = observer(() => {
                 <Droppable droppableId="todo">
                     {(provided) => (
                         <ul className="tasks" {...provided.droppableProps} ref={provided.innerRef}>
-                            
+
                             {ListStore.tasks.map(({id, todo}, index) => {
                                 return (
                                     <Draggable key={id} draggableId={id} index={index}>
