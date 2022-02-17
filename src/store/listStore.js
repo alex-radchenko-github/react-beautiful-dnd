@@ -8,18 +8,30 @@ class ListStore {
         {id: '54116c42-22f7-421c-9a1f-8804e28b844d', todo: 'Task 4', order: 3},
         {id: '866c025e-5a19-4753-8737-1cc452227e3a', todo: 'Task 5', order: 4},
     ];
+
     constructor() {
         makeAutoObservable(this)
     }
 
-    sortTask(){
-        this.tasks.sort((a,b) => a.order - b.order)
+    sortTask() {
+        this.tasks.sort((a, b) => a.order - b.order)
         return this.tasks
     }
 
-    changeOrderItem(a,b){
-        this.tasks[a].order = b
-        this.tasks[b].order = a
+    changeOrderItem(a, b) {
+
+        for (let i = 0; i < this.tasks.length; i++) {
+            if (this.tasks[i].order > a && a > b) {
+                this.tasks[i].order -= 1
+            }
+            if (this.tasks[i].order <= a) {
+                this.tasks[i].order += 1
+            }
+
+
+        }
+        this.tasks[a].order = b + 1
+        // this.tasks[b].order = a
     }
 
 }

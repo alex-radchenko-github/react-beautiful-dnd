@@ -6,13 +6,13 @@ import './TodoList.css';
 
 function handleOnDragEnd(result) {
     // old way
-    // if (!result.destination) return;
-    // const items = Array.from(ListStore.tasks);
-    // const [reorderedItem] = items.splice(result.source.index, 1);
-    // items.splice(result.destination.index, 0, reorderedItem);
-    // ListStore.tasks = items;
-
-    ListStore.changeOrderItem(result.source.index, result.destination.index)
+    if (!result.destination) return;
+    const items = Array.from(ListStore.tasks);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    ListStore.tasks = items;
+    // console.log(result)
+    // ListStore.changeOrderItem(result.source.index, result.destination.index)
 }
 
 const TodoList = observer(() => {
