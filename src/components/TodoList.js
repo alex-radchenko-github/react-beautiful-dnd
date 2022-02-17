@@ -5,12 +5,14 @@ import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import './TodoList.css';
 
 function handleOnDragEnd(result) {
-    if (!result.destination) return;
+    // old way
+    // if (!result.destination) return;
+    // const items = Array.from(ListStore.tasks);
+    // const [reorderedItem] = items.splice(result.source.index, 1);
+    // items.splice(result.destination.index, 0, reorderedItem);
+    // ListStore.tasks = items;
 
-    const items = Array.from(ListStore.tasks);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    ListStore.tasks = items;
+    ListStore.changeOrderItem(result.source.index, result.destination.index)
 }
 
 const TodoList = observer(() => {
@@ -19,7 +21,7 @@ const TodoList = observer(() => {
                 <Droppable droppableId="todo">
                     {(provided) => (
                         <ul className="tasks" {...provided.droppableProps} ref={provided.innerRef}>
-                            {ListStore.tasks.map(({id, todo}, index) => {
+                            {ListStore.sortTask().map(({id, todo}, index) => {
                                 return (
                                     <Draggable key={id} draggableId={id} index={index}>
                                         {(provided) => (
